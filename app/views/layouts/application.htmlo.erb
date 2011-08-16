@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <body>
-  <div class="container">
-  <header>
+  <head>
     <title><%= title %></title>
     <%= csrf_meta_tag %>
     <%= render 'layouts/stylesheets' %>
       <%= render 'layouts/header' %>
-    </header>
       <section class="round">
         <% flash.each do |key, value| %>
          <%= content_tag(:div, value, :class => "flash #{key}") %>
