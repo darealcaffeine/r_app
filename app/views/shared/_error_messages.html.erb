@@ -1,15 +1,13 @@
-	
-
 <% if @user.errors.any? %>
-<div class="error_explanation" id="error_explanation">
-  <h2>5 errors prohibited this user from being saved</h2>
-  <p>There were problems with the following fields:</p>
-  <ul>
-    <li>Name can't be blank</li>
-    <li>Email can't be blank</li>
-    <li>Email is invalid</li>
-    <li>Password can't be blank</li>
-    <li>Password is too short (minimum is 6 characters)</li>
-  </ul>
-</div>
+  <div id="error_explanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> 
+        prohibited this user from being saved:</h2>
+    <p>There were problems with the following fields:</p>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
 <% end %>
+
