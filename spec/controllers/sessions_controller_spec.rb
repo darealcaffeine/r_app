@@ -56,6 +56,7 @@ describe SessionsController do
         post :create, :session => @attr
         response.should redirect_to(user_path(@user))
       end    
+    end
   end
    
   describe "DELETE 'destroy'" do
@@ -67,5 +68,12 @@ describe SessionsController do
       response.should redirect_to(root_path)
     end
   end
-end
+
+  describe "admin" do
+    before(:each) do
+        @user = Factory(:user)
+        @attr = { :email => @user.email, :password => @user.password }
+        @user.toggle!(:admin)
+     end
+  end
 end

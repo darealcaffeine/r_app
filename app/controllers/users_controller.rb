@@ -8,16 +8,22 @@ class UsersController < ApplicationController
     @title=@user.name
   end
  
-  def new
-    @title="Sign up"
-  end
 
   def new
+    if self.signed_in?
+       redirect_to (root_path)
+    end
     @user = User.new
     @title = "Sign up"
+
   end
-  
+
   def create
+
+    if self.signed_in?
+       redirect_to (root_path)
+    end
+ 
     @user = User.new(params[:user])
     if @user.save
     sign_in @user
@@ -27,8 +33,12 @@ class UsersController < ApplicationController
       @title = "Sign up"
       render 'new'
     end
+ 
+  
   end
 
+
+  
   def edit
     @title = "Edit user"
   end
@@ -55,9 +65,22 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User destroyed."
-    redirect_to users_path
+    if current_user.admin?
+       if User.find(params[:id])==current_user
+          redirect_to users_path
+          flash[:fail] = "Cannot delete Admin"
+      else      
+          User.find(params[:id]).destroy 
+          flash[:success] = "User destroyed."
+          redirect_to users_path
+      end
+    end
+  
+#     def deny_delete
+ #      if User.find(params[:id])==current_user
+  #     redirect_to users_path
+   #   flash[:fail] = "Cannot delete Admin"
+ #  end
   end
 
   private

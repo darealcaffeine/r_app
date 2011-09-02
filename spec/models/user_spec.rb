@@ -107,7 +107,7 @@ describe User do
         @user.has_password?("invalid").should be_false
        end 
     end   
-  end  
+    
         describe "authenticate method" do
 
         it "should return nil on email/password mismatch" do
@@ -125,7 +125,7 @@ describe User do
           matching_user.should == @user
         end
       end
-
+    end
 
 
   describe "admin attribute" do

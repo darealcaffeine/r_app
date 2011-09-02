@@ -56,6 +56,11 @@ describe "LayoutLinks" do
      response.should have_selector("a", :href => user_path(@user),
                                         :content => "Profile")
     end
+    
+    it "should not have link to delete" do
+      visit users_path(@user)
+      response.should_not have_selector("a", :content => "delete")
+    end
   end
 end
 
