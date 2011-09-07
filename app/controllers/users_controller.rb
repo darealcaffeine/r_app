@@ -75,6 +75,13 @@ class UsersController < ApplicationController
           redirect_to users_path
       end
     end
+
+
+    def show
+      @user = User.find(params[:id])
+      @microposts = @user.microposts.paginate(:page => params[:page])
+      @title = @user.name
+    end
   
 #     def deny_delete
  #      if User.find(params[:id])==current_user
