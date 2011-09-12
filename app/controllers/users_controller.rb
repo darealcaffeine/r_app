@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :only => [:index, :edit, :update, :destroy]
   before_filter :correct_user, :only => [:edit, :update]  
-  before_filter :admin_user,   :only => :destroy
+  before_filter :admin_user,   :only => [:destroy, :toggle]
 
   def show
     @user=User.find(params[:id])
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
 
   
   def edit
+    @user = User.find(params[:id])
     @title = "Edit user"
   end
 
@@ -83,6 +84,16 @@ class UsersController < ApplicationController
       @microposts = @user.microposts.paginate(:page => params[:page])
       @title = @user.name
     end
+
+#    def toggle 
+#      User.find(params[:id]).admin = true      
+
+       # @user.toggle! (:admin)
+ #       if  User.admin?
+  #      flash[:success] = User.name "is now an Adminstrator."
+   #     redirect_to users_path
+    #    end
+  #  end
   
 #     def deny_delete
  #      if User.find(params[:id])==current_user
