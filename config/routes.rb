@@ -12,6 +12,7 @@ OApp::Application.routes.draw do
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
+  match 'users/:id/microposts',  :to => 'users#show'  
 
  root :to => 'pages#home'
 

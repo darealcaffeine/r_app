@@ -4,9 +4,5 @@
   <% if current_user.admin? %>
   | <%= link_to "delete", user, :method => :delete, :confirm => "You sure?",
                                 :title => "Delete #{user.name}"%>
-
-    <%= link_to "Make Admin", user, :method => :post, :confirm => "You sure?",
-                                :title => "Toggle #{user.name}"%>
-
   <% end %>
 </li>

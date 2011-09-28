@@ -15,6 +15,15 @@ describe PagesController do
       response.should have_selector("title",
                         :content => "Ruby on Rails Tutorial Sample App | Home")
     end
+   
+    it "should display the number of microposts in sidebar" do
+      @user = test_sign_in(Factory(:user))
+      mp1 = Factory(:micropost, :user => @user, :content => "foo bar")
+      get 'home'
+      response.should have_selector("td.sidebar", :content => "1 micropost")
+    end
+
+ 
   end
 
   describe "GET 'contact'" do
